@@ -1,0 +1,21 @@
+name: GunFactory
+main: nl.knokko.guns.plugin.ShooterPlugin
+version: 0.5
+commands:
+  guns:
+    description: Give yourself a gun in the spawn
+    useage: /guns
+  gunsop:
+    description: GunFactory command for operators
+    useage: /gunsop ...
+    aliases: [go]
+  wavemonster:
+    description: Modify your bound wave monster
+    useage: /wm ...
+    aliases: [wm]
+  join:
+    description: Join a map
+    useage: /join <map number>
+  tutorial:
+    description: Watch the tutorial
+    useage: /tutorial
