@@ -14,7 +14,7 @@ public class CommandGuns implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(sender instanceof Player){
 			Player player = (Player) sender;
-			if(player.getWorld().getName().equals("spawn")){
+			if(player.getWorld().getName().equals("world")){
 				player.openInventory(MenuFactory.createGunSpawn(ShooterPlugin.get().getDataManager().getPlayer(player.getUniqueId())));
 			}
 			else {

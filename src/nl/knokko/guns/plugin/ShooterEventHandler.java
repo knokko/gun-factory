@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import net.minecraft.server.v1_11_R1.EntitySnowball;
-import net.minecraft.server.v1_11_R1.World;
+import net.minecraft.server.v1_12_R1.EntitySnowball;
+import net.minecraft.server.v1_12_R1.World;
 import nl.knokko.guns.Gun;
 import nl.knokko.guns.GunType;
 import nl.knokko.guns.command.CommandTutorial;
@@ -24,8 +24,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_11_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -317,7 +317,7 @@ public class ShooterEventHandler implements Listener {
 	
 	private void fireBullet(World world, UUID id, Player player, Location loc, Gun gun, double yaw, double pitch){
 		EntitySnowball bullet = new EntitySnowball(world, loc.getX(), loc.getY() + player.getEyeHeight(), loc.getZ());
-		bullet.c = ((CraftPlayer)player).getHandle();
+		bullet.shooter = ((CraftPlayer)player).getHandle();
 		bullet.attachedToPlayer = true;
 		double speed = gun.getType().getStartSpeed();
 		bullet.motX = -speed * Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));

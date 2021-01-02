@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.minecraft.server.v1_11_R1.NBTCompressedStreamTools;
-import net.minecraft.server.v1_11_R1.NBTReadLimiter;
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_12_R1.NBTCompressedStreamTools;
+import net.minecraft.server.v1_12_R1.NBTReadLimiter;
+import net.minecraft.server.v1_12_R1.NBTTagCompound;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,7 +19,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 
 public class WaveMonster {
 	
@@ -42,7 +42,7 @@ public class WaveMonster {
 	}
 	
 	public static void saveItemStack(ItemStack stack, DataOutputStream output) throws IOException {
-		net.minecraft.server.v1_11_R1.ItemStack nms = CraftItemStack.asNMSCopy(stack);
+		net.minecraft.server.v1_12_R1.ItemStack nms = CraftItemStack.asNMSCopy(stack);
 		NBTTagCompound nbt = new NBTTagCompound();
 		if(nms != null)
 			nms.save(nbt);
@@ -53,7 +53,7 @@ public class WaveMonster {
 		NBTTagCompound nbt = NBTCompressedStreamTools.a(input, NBTReadLimiter.a);
 		if(nbt.isEmpty())
 			return null;
-		net.minecraft.server.v1_11_R1.ItemStack nms = new net.minecraft.server.v1_11_R1.ItemStack(nbt);
+		net.minecraft.server.v1_12_R1.ItemStack nms = new net.minecraft.server.v1_12_R1.ItemStack(nbt);
 		return CraftItemStack.asBukkitCopy(nms);
 	}
 	
