@@ -83,7 +83,7 @@ public class Gun {
 		ItemMeta meta = Bukkit.getItemFactory().getItemMeta(Material.DIAMOND_HOE);
 		meta.setDisplayName(type.toString() + " <" + currentAmmo + "/" + type.getAmmo(level) + ">");
 		meta.setUnbreakable(true);
-		List<String> lore = new ArrayList<String>(2);
+		List<String> lore = new ArrayList<String>(1);
 		lore.add("level " + level);
 		meta.setLore(lore);
 		return meta;
