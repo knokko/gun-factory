@@ -23,7 +23,8 @@ public class Gun {
 					GunType type = GunType.fromString(n.substring(0, indexToken - 1));
 					int level = Integer.parseInt(lore.get(0).substring(6));
 					int ammo = Integer.parseInt(n.substring(indexToken + 1, indexSlash));
-					return new Gun(type, level, ammo);
+					boolean isZooming = item.getDurability() % 2 == 0;
+					return new Gun(type, level, ammo, isZooming);
 				} catch(Exception ex){
 					//this is no gun
 				}
@@ -38,14 +39,25 @@ public class Gun {
 	
 	private int currentAmmo;
 
-	public Gun(GunType type, int level, int currentAmmo) {
+	private boolean isZooming;
+
+	public Gun(GunType type, int level, int currentAmmo, boolean isZooming) {
 		this.type = type;
 		this.level = level;
 		this.currentAmmo = currentAmmo;
+		this.isZooming = isZooming;
+	}
+
+	public void toggleZoom() {
+		isZooming = !isZooming;
 	}
 	
 	public Gun(GunType type, int level){
-		this(type, level, type.getAmmo(level));
+		this(type, level, type.getAmmo(level), false);
+	}
+
+	public boolean isZooming() {
+		return isZooming;
 	}
 	
 	public GunType getType(){
@@ -75,7 +87,7 @@ public class Gun {
 	public ItemStack createItem(){
 		ItemStack item = new ItemStack(Material.DIAMOND_HOE);
 		item.setItemMeta(createItemMeta());
-		item.setDurability((short) (1 + type.ordinal()));
+		item.setDurability((short) (1 + 2 * type.ordinal() + (isZooming ? 1 : 0)));
 		return item;
 	}
 	

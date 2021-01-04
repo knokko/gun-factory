@@ -185,7 +185,7 @@ public class MenuFactory {
 			meta.setLore(Lists.newArrayList(lore));
 		item.setItemMeta(meta);
 		
-		item.setDurability((short) (1 + type.ordinal()));
+		item.setDurability((short) (1 + 2 * type.ordinal()));
         return item;
 	}
 }

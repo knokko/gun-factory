@@ -76,7 +76,7 @@ public class ShooterEventHandler implements Listener {
 	}
 	
 	@EventHandler
-	public void onItemRightClick(PlayerInteractEvent event){
+	public void clickWithItem(PlayerInteractEvent event){
 		ItemStack item = event.getItem();
 		if(item != null && event.getHand() == EquipmentSlot.HAND){
 			Gun gun = Gun.fromItem(item);
@@ -86,10 +86,14 @@ public class ShooterEventHandler implements Listener {
 					ShooterPlugin.get().getDataManager().getPlayer(event.getPlayer().getUniqueId()).setShooting();
 				}
 				else {
-					if(event.getPlayer().hasPotionEffect(PotionEffectType.SLOW))
-						event.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-					else
-						event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2000, 5));
+					gun.toggleZoom();
+					Player player = event.getPlayer();
+					event.getPlayer().getInventory().setItemInMainHand(gun.createItem());
+					if (gun.isZooming()) {
+						player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30_000, 5));
+					} else {
+						player.removePotionEffect(PotionEffectType.SLOW);
+					}
 				}
 			}
 			else if(item.getType() == Material.BLAZE_ROD && event.getAction() == Action.RIGHT_CLICK_BLOCK){
@@ -121,7 +125,7 @@ public class ShooterEventHandler implements Listener {
 							else {
 								System.out.println("No monster places");
 							}
-						} catch(NumberFormatException nfe){}//someone has another blaze rod with lore
+						} catch(NumberFormatException ignored){}//someone has another blaze rod with lore
 					}
 				}
 			}
@@ -296,6 +300,12 @@ public class ShooterEventHandler implements Listener {
 					fireBullet(world, id, player, loc, gun, yaw, pitch + a);
 					fireBullet(world, id, player, loc, gun, yaw + a * 0.866025, pitch - a / 2);
 					fireBullet(world, id, player, loc, gun, yaw - a * 0.866025, pitch - a / 2);
+				}
+				else if (count == 4) {
+					fireBullet(world, id, player, loc, gun, yaw + a, pitch);
+					fireBullet(world, id, player, loc, gun, yaw, pitch + a);
+					fireBullet(world, id, player, loc, gun, yaw - a, pitch);
+					fireBullet(world, id, player, loc, gun, yaw, pitch - a);
 				}
 				else if(count == 5){
 					fireBullet(world, id, player, loc, gun, yaw, pitch);
